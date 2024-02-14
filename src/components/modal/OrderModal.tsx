@@ -132,7 +132,11 @@ const OrderModal = ({ setOrderVisible }: Props) => {
               color={'#000'}
               lineHeight={1.18}
             >
-              {/* {quantity && quantity * 11000}원 */}0
+              {(
+                sogogiQuantity * 10000 +
+                gomtangQuantity * 10000
+              ).toLocaleString()}
+              원
             </CSText>
           </div>
         </div>
