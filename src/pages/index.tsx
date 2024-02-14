@@ -19,7 +19,6 @@ import ReviewSection from '@components/main/ReviewSection'
 import Button from '@components/cs/Button'
 import { toSize } from 'styles/globalStyle'
 import NotiModal from '@components/modal/NotiModal'
-import { isEmpty } from 'lodash'
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
@@ -81,9 +80,7 @@ const Main = ({
 
       <div css={[buttonWrapper, { width: width > 500 ? '500px' : '100%' }]}>
         <Button
-          onClick={() =>
-            isEmpty(user.uid) ? setNotiVisible(true) : setOrderVisible(true)
-          }
+          onClick={() => setOrderVisible(true)}
           btnHeight={50}
           backgroundColor={'#000'}
           fontSize={17}

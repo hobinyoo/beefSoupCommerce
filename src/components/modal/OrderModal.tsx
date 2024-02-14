@@ -20,8 +20,8 @@ interface Props {
 const OrderModal = ({ setOrderVisible }: Props) => {
   const router = useRouter()
 
-  const [quantity, setQuantity] = useState<number>(1)
-  const [packaging, setPackaging] = useState<string>('포장 방법 선택')
+  const [sogogiQuantity, setSogotiQuantity] = useState<number>(0)
+  const [gomtangQuantity, setGotangQuantity] = useState<number>(0)
 
   const { width, height } = useAppSelector(
     (state: RootState) => state.windowSize.windowSize
@@ -29,6 +29,7 @@ const OrderModal = ({ setOrderVisible }: Props) => {
   const getSize = (input: number) => {
     return toSize(width, height, input)
   }
+
   return (
     <div css={overlay}>
       <div css={[orderModal, { height: `${toHeightSize(height, 540)}px` }]}>
@@ -51,8 +52,13 @@ const OrderModal = ({ setOrderVisible }: Props) => {
           >
             {'메뉴'}
           </CSText>
-          <MenuControl />
-          <CSText
+          <MenuControl
+            sogogiQuantity={sogogiQuantity}
+            setSogotiQuantity={setSogotiQuantity}
+            gomtangQuantity={gomtangQuantity}
+            setGotangQuantity={setGotangQuantity}
+          />
+          {/* <CSText
             size={15}
             fontFamily={'PretendardBold'}
             color={'#000'}
@@ -61,8 +67,8 @@ const OrderModal = ({ setOrderVisible }: Props) => {
           >
             {'포장 방법을 선택해주세요.'}
           </CSText>
-          <PackagingControl packaging={packaging} setPackaging={setPackaging} />
-          <div
+          <PackagingControl packaging={packaging} setPackaging={setPackaging} /> */}
+          {/* <div
             css={[
               decideQuantity,
               {
@@ -101,7 +107,7 @@ const OrderModal = ({ setOrderVisible }: Props) => {
               </CSSpan>
             </CSText>
             <CountControl quantity={quantity} setQuantity={setQuantity} />
-          </div>
+          </div> */}
           <div
             css={[
               price,
@@ -126,14 +132,14 @@ const OrderModal = ({ setOrderVisible }: Props) => {
               color={'#000'}
               lineHeight={1.18}
             >
-              {quantity && quantity * 11000}원
+              {/* {quantity && quantity * 11000}원 */}0
             </CSText>
           </div>
         </div>
         <div css={buttonWrapper}>
           <Button
             onClick={() =>
-              router.push(`/order/한우 소고기 국밥/${quantity}`, undefined, {
+              router.push(`/order/한우 소고기 국밥/${1}`, undefined, {
                 shallow: true,
               })
             }
