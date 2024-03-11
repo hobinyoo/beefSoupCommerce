@@ -41,7 +41,7 @@ const DrawerList = ({ uid, name }: Props) => {
         width: `${getSize(240)}px`,
       }}
     >
-      <div
+      {/* <div
         css={[
           content,
           {
@@ -95,7 +95,7 @@ const DrawerList = ({ uid, name }: Props) => {
         )}
       </div>
 
-      <Divider />
+      <Divider /> */}
       <div
         onClick={handleMyOrder}
         css={[
@@ -159,7 +159,7 @@ const DrawerList = ({ uid, name }: Props) => {
         </CSText>
       </div>
       <Divider />
-      <div
+      {/* <div
         css={{
           width: '100%',
           justifyContent: 'center',
@@ -178,7 +178,7 @@ const DrawerList = ({ uid, name }: Props) => {
         >
           {'로그아웃'}
         </CSText>
-      </div>
+      </div> */}
     </div>
   )
 }

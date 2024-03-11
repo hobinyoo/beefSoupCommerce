@@ -7,9 +7,6 @@ import IconX from '/public/X.svg'
 import { RootState, useAppSelector } from 'src/store'
 import { toHeightSize, toSize } from 'styles/globalStyle'
 import CSText from '@components/cs/CSText'
-import PackagingControl from '@components/PackagingControl'
-import CSSpan from '@components/cs/CSSpan'
-import CountControl from '@components/CountControl'
 
 interface Props {
   uid: string
@@ -58,56 +55,7 @@ const OrderModal = ({ setOrderVisible }: Props) => {
             gomtangQuantity={gomtangQuantity}
             setGotangQuantity={setGotangQuantity}
           />
-          {/* <CSText
-            size={15}
-            fontFamily={'PretendardBold'}
-            color={'#000'}
-            lineHeight={1.25}
-            marginTop={20}
-          >
-            {'포장 방법을 선택해주세요.'}
-          </CSText>
-          <PackagingControl packaging={packaging} setPackaging={setPackaging} /> */}
-          {/* <div
-            css={[
-              decideQuantity,
-              {
-                width: `${getSize(320)}px`,
-                height: `${getSize(80)}px`,
-                marginTop: `${getSize(20)}px`,
-                padding: `0 ${getSize(20)}px`,
-              },
-            ]}
-          >
-            <CSText
-              size={13}
-              fontFamily={'PretendardRegular'}
-              color={'#000'}
-              lineHeight={1.15}
-              marginTop={13}
-            >
-              {'한우 소고기 국밥(1300g)'}
-              <span
-                css={[
-                  line,
-                  {
-                    fontSize: `${getSize(10)}px`,
-                    margin: `0 ${getSize(10)}px`,
-                    lineHeight: 1.15,
-                  },
-                ]}
-              />
-              <CSSpan
-                size={13}
-                fontFamily={'PretendardRegular'}
-                color={'#000'}
-                lineHeight={1.15}
-              >
-                {packaging}
-              </CSSpan>
-            </CSText>
-            <CountControl quantity={quantity} setQuantity={setQuantity} />
-          </div> */}
+
           <div
             css={[
               price,
@@ -143,9 +91,13 @@ const OrderModal = ({ setOrderVisible }: Props) => {
         <div css={buttonWrapper}>
           <Button
             onClick={() =>
-              router.push(`/order/한우 소고기 국밥/${1}`, undefined, {
-                shallow: true,
-              })
+              router.push(
+                `/order/${sogogiQuantity}/${gomtangQuantity}`,
+                undefined,
+                {
+                  shallow: true,
+                }
+              )
             }
             btnHeight={50}
             backgroundColor={'#000'}
@@ -179,13 +131,7 @@ const orderModal = css`
   border-top-right-radius: 10px;
   z-index: 9999;
 `
-const decideQuantity = css`
-  background-color: #f6f6f6;
-  border: solid 1px #ececec;
-`
-const line = css`
-  border: solid 1px #9e9795;
-`
+
 const price = css`
   display: flex;
   justify-content: space-between;

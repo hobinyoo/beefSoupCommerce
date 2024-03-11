@@ -49,15 +49,15 @@ const Order = ({
   const getSize = (input: number) => {
     return toSize(width, height, input)
   }
-  const [name, setName] = useState<string>(data.items.name ?? '')
+  const [name, setName] = useState<string>(data.items?.name ?? '')
   const [phoneNumber, setPhoneNumber] = useState<string>(
-    data.items.phoneNumber ?? ''
+    data.items?.phoneNumber ?? ''
   )
-  const [address, setAddress] = useState<string>(data.items.address ?? '')
+  const [address, setAddress] = useState<string>(data.items?.address ?? '')
   const [addressDetail, setAddressDetail] = useState<string>(
-    data.items.addressDetail ?? ''
+    data.items?.addressDetail ?? ''
   )
-  const [postCode, setPostCode] = useState<string>(data.items.postCode ?? '')
+  const [postCode, setPostCode] = useState<string>(data.items?.postCode ?? '')
   const [carrierRequest, setCarrierRequest] = useState<string>('')
 
   const [selectPayMethod, setSelectPayMethod] = useState<string>('카드 결제')
@@ -79,14 +79,9 @@ const Order = ({
     },
   }
 
-  const product = [
-    { title: '상품명', content: orderInfo && orderInfo[0] },
-    { title: '수량', content: `${orderInfo && orderInfo[1]}개` },
-    {
-      title: '제품가격',
-      content: `${Number(orderInfo && orderInfo[1]) * 11000}원`,
-    },
-    { title: '배송비', content: '3000원' },
+  const products = [
+    { title: '한우소고기국밥', content: orderInfo && orderInfo[0] },
+    { title: '한우곰탕', content: orderInfo && orderInfo[1] },
   ]
 
   const payMethod = ['카드 결제', '계좌 이체', '에스크로 결제']
@@ -104,34 +99,57 @@ const Order = ({
         >
           {'주문 상품'}
         </CSText>
-        {product.map(({ title, content }, index) => {
-          return (
-            <div
-              key={index}
-              css={[orderProduct, { marginTop: `${getSize(15)}px` }]}
-            >
-              <CSText
-                size={15}
-                fontFamily={'PretendardRegular'}
-                color={'#8b8b8b'}
-                lineHeight={1.2}
-                marginBottom={5}
+        {products.map(({ title, content }, index) => {
+          if (Number(content) > 0) {
+            return (
+              <div
+                key={index}
+                css={[orderProduct, { marginTop: `${getSize(15)}px` }]}
               >
-                {title}
-              </CSText>
+                <CSText
+                  size={15}
+                  fontFamily={'PretendardRegular'}
+                  color={'#8b8b8b'}
+                  lineHeight={1.2}
+                  marginBottom={5}
+                >
+                  {title}
+                </CSText>
 
-              <CSText
-                size={15}
-                fontFamily={'PretendardBold'}
-                color={'#000'}
-                lineHeight={1.2}
-                marginBottom={5}
-              >
-                {content}
-              </CSText>
-            </div>
-          )
+                <CSText
+                  size={15}
+                  fontFamily={'PretendardBold'}
+                  color={'#000'}
+                  lineHeight={1.2}
+                  marginBottom={5}
+                >
+                  {Number(content) * 10000}원
+                </CSText>
+              </div>
+            )
+          }
         })}
+        <div css={[orderProduct, { marginTop: `${getSize(15)}px` }]}>
+          <CSText
+            size={15}
+            fontFamily={'PretendardRegular'}
+            color={'#8b8b8b'}
+            lineHeight={1.2}
+            marginBottom={5}
+          >
+            배송비
+          </CSText>
+
+          <CSText
+            size={15}
+            fontFamily={'PretendardBold'}
+            color={'#000'}
+            lineHeight={1.2}
+            marginBottom={5}
+          >
+            5,000원
+          </CSText>
+        </div>
         <div
           css={[
             totalPrice,
@@ -159,7 +177,10 @@ const Order = ({
             lineHeight={1.2}
             marginBottom={5}
           >
-            {Number(orderInfo && orderInfo[1]) * 11000 + 3000}원
+            {Number(orderInfo && Number(orderInfo[0]) + Number(orderInfo[1])) *
+              10000 +
+              5000}
+            원
           </CSText>
         </div>
       </div>
@@ -340,7 +361,7 @@ const Order = ({
 
       <PayMents
         uid={data.uid}
-        menu={'한우 소고기 국밥'}
+        menu={'한우소고기국밥'}
         quantity={String(orderInfo && orderInfo[1])}
         totalPrice={Number(orderInfo && orderInfo[1]) * 11000 + 3000}
         name={name}

@@ -19,6 +19,7 @@ import ReviewSection from '@components/main/ReviewSection'
 import Button from '@components/cs/Button'
 import { toSize } from 'styles/globalStyle'
 import NotiModal from '@components/modal/NotiModal'
+import UserModal from '@components/modal/UserModal'
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
@@ -43,6 +44,7 @@ const Main = ({
     (state: RootState) => state.windowSize.windowSize
   )
   const [orderVisible, setOrderVisible] = useState<boolean>(false)
+  const [userModalVisible, setUserModalVisible] = useState<boolean>(false)
   const [notiVisible, setNotiVisible] = useState<boolean>(false)
 
   const getSize = (input: number) => {
@@ -99,6 +101,7 @@ const Main = ({
           setOrderVisible={setOrderVisible}
         />
       )}
+      <UserModal setUserModalVisible={setUserModalVisible} />
     </div>
   )
 }

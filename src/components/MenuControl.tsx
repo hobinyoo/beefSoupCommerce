@@ -33,8 +33,6 @@ const MenuControl = ({
           css={[
             menuBox,
             {
-              width: `${getSize(320)}px`,
-              height: `${getSize(46)}px`,
               borderTop: `${index === 0 && 'solid 1px #ececec'}`,
               borderLeft: 'solid 1px #ececec',
               borderRight: 'solid 1px #ececec',
@@ -42,18 +40,28 @@ const MenuControl = ({
             },
           ]}
         >
+          <div css={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <CSText
+              size={14}
+              fontFamily={'PretendardRegular'}
+              color={'#000'}
+              lineHeight={1.14}
+            >
+              {item}
+            </CSText>
+            <CountControl
+              quantity={index === 0 ? sogogiQuantity : gomtangQuantity}
+              setQuantity={index === 0 ? setSogotiQuantity : setGotangQuantity}
+            />
+          </div>
           <CSText
-            size={14}
+            size={16}
             fontFamily={'PretendardRegular'}
             color={'#000'}
-            lineHeight={1.14}
+            lineHeight={1.18}
           >
-            {item}
+            10,000원
           </CSText>
-          <CountControl
-            quantity={index === 0 ? sogogiQuantity : gomtangQuantity}
-            setQuantity={index === 0 ? setSogotiQuantity : setGotangQuantity}
-          />
         </div>
       ))}
     </div>
@@ -65,6 +73,6 @@ const menuBox = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 20px;
 `
 export default MenuControl
